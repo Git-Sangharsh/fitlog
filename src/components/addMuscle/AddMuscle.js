@@ -54,7 +54,7 @@ const AddMuscle = () => {
     if (inputValue.trim()) {
       try {
         const res = await axios.post(
-          `https://fitlog-server.onrender.com/${currentMuscle}/exercise`,
+          `https://fitlog-server.onrender.com/category/${currentMuscle}/exercise`,
           {
             name: inputValue,
             userEmail: currentUserEmail,
