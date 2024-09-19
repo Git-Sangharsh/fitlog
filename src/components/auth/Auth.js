@@ -58,7 +58,7 @@ const Auth = () => {
       // console.log("pls enter password");
     } else {
       try {
-        const res = await axios.post("http://localhost:5000/register", {
+        const res = await axios.post("https://fitlog-server.onrender.com/register", {
           userEmail: userEmail,
           userPass: userPassword,
         });
@@ -87,7 +87,7 @@ const Auth = () => {
 
   const handlSignIn = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/signin", {
+      const res = await axios.post("https://fitlog-server.onrender.com/signin", {
         userEmail: userEmail,
         userPass: userPassword,
       });
@@ -148,7 +148,7 @@ const Auth = () => {
       const decoded = jwtDecode(credentialResponse?.credential);
       const { email } = decoded;
 
-      const response = await axios.post("http://localhost:5000/google-signin", {
+      const response = await axios.post("https://fitlog-server.onrender.com/google-signin", {
         email,
       });
       console.log(response.data);

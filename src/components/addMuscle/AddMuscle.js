@@ -31,7 +31,7 @@ const AddMuscle = () => {
   const handleAddMuscle = async () => {
     if (inputValue.trim()) {
       try {
-        const res = await axios.post("http://localhost:5000/category", {
+        const res = await axios.post("https://fitlog-server.onrender.com/category", {
           name: inputValue,
           userEmail: currentUserEmail,
         });
@@ -54,7 +54,7 @@ const AddMuscle = () => {
     if (inputValue.trim()) {
       try {
         const res = await axios.post(
-          `http://localhost:5000/category/${currentMuscle}/exercise`,
+          `https://fitlog-server.onrender.com/${currentMuscle}/exercise`,
           {
             name: inputValue,
             userEmail: currentUserEmail,

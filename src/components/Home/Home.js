@@ -15,6 +15,8 @@ const Home = () => {
       .catch((err) => console.error(err.message));
   }, []);
 
+  console.log("data is", data)
+
   const handleClick = (exercise) => {
     // Dispatch selected exercise to Redux
     dispatch({ type: 'SET_SELECTED_EXERCISE', payload: exercise });

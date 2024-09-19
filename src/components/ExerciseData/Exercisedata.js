@@ -55,7 +55,7 @@ const Exercisedata = () => {
 
           // Get updated exercise data
           const updatedExerciseRes = await axios.get(
-            `http://localhost:5000/category/${currentMuscle}/exercise/${currentExercise.name}?userEmail=${currentUserEmail}`
+            `https://fitlog-server.onrender.com/category/${currentMuscle}/exercise/${currentExercise.name}?userEmail=${currentUserEmail}`
           );
 
           // console.log("updateExercise Res = ", updatedExerciseRes.data);
@@ -188,7 +188,7 @@ const Exercisedata = () => {
   const handleAddSet = async () => {
     const encodedExerciseName = encodeURIComponent(currentExercise.name);
     const res = await axios.post(
-      `http://localhost:5000/category/${currentMuscle}/exercise/${encodedExerciseName}/note`,
+      `https://fitlog-server.onrender.com/category/${currentMuscle}/exercise/${encodedExerciseName}/note`,
       {
         weight: kgValue,
         reps: repsValue,
@@ -205,7 +205,7 @@ const Exercisedata = () => {
       // console.log("Successfully added the set.");
       dispatch(fetchCategories(currentUserEmail));
       const updatedExerciseRes = await axios.get(
-        `http://localhost:5000/category/${currentMuscle}/exercise/${encodedExerciseName}?userEmail=${currentUserEmail}`
+        `https://fitlog-server.onrender.com/category/${currentMuscle}/exercise/${encodedExerciseName}?userEmail=${currentUserEmail}`
       );
 
       dispatch({
@@ -220,7 +220,7 @@ const Exercisedata = () => {
     if (selectedNoteIndex !== null) {
       // Update an existing set by using the _id (noteId)
       const res = await axios.put(
-        `http://localhost:5000/category/${currentMuscle}/exercise/${encodedExerciseName}/note/${selectedNoteIndex}`, // Use _id (selectedNoteIndex)
+        `https://fitlog-server.onrender.com/category/${currentMuscle}/exercise/${encodedExerciseName}/note/${selectedNoteIndex}`, // Use _id (selectedNoteIndex)
         {
           weight: kgValue,
           reps: repsValue,
@@ -233,7 +233,7 @@ const Exercisedata = () => {
         setSelectedNoteIndex(null);
       }
       const updatedExerciseRes = await axios.get(
-        `http://localhost:5000/category/${currentMuscle}/exercise/${encodedExerciseName}?userEmail=${currentUserEmail}`
+        `https://fitlog-server.onrender.com/category/${currentMuscle}/exercise/${encodedExerciseName}?userEmail=${currentUserEmail}`
       );
 
       dispatch({
@@ -250,7 +250,7 @@ const Exercisedata = () => {
       try {
         // Send the DELETE request with proper data format
         const res = await axios.delete(
-          `http://localhost:5000/category/${currentMuscle}/exercise/${encodedExerciseName}/note/${selectedNoteIndex}`,
+          `https://fitlog-server.onrender.com/category/${currentMuscle}/exercise/${encodedExerciseName}/note/${selectedNoteIndex}`,
           {
             data: {
               userEmail: currentUserEmail,
@@ -265,7 +265,7 @@ const Exercisedata = () => {
         }
 
         const updatedExerciseRes = await axios.get(
-          `http://localhost:5000/category/${currentMuscle}/exercise/${encodedExerciseName}?userEmail=${currentUserEmail}`
+          `https://fitlog-server.onrender.com/category/${currentMuscle}/exercise/${encodedExerciseName}?userEmail=${currentUserEmail}`
         );
 
         dispatch({

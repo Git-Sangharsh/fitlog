@@ -32,7 +32,7 @@ const Muscles = () => {
   const handleTrash = async (name) => {
     try {
       // Sending DELETE request with category name in the path and userEmail as a query parameter
-      const response = await axios.delete(`http://localhost:5000/category/${name}`, {
+      const response = await axios.delete(`https://fitlog-server.onrender.com/category/${name}`, {
         params: { userEmail: currentUserEmail }, // Pass userEmail as query parameter
       });
 

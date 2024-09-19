@@ -54,7 +54,7 @@ const reducer = (state = initialState, action) => {
 // Action to fetch categories
 export const fetchCategories = (userEmail) => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:5000/categories", {
+    const res = await axios.get("https://fitlog-server.onrender.com/categories", {
       params: { userEmail },
     });
     // console.log("action fetch store ", res.data);

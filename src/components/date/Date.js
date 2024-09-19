@@ -78,7 +78,7 @@ const DateComponent = () => {
 
       try {
         if (currentUserEmail && dateFormat) {
-          const response = await axios.get(`http://localhost:5000/exercises`, {
+          const response = await axios.get(`https://fitlog-server.onrender.com/exercises`, {
             params: {
               userEmail: currentUserEmail,
               date: dateFormat,

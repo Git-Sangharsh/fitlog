@@ -34,7 +34,7 @@ const Exerciselist = () => {
 
   const handleTrashExercise = async (exerciseName) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/category/${currentMuscle}/exercise/${exerciseName}`, {
+      const response = await axios.delete(`https://fitlog-server.onrender.com/category/${currentMuscle}/exercise/${exerciseName}`, {
         data: { userEmail: currentUserEmail }, // Ensure userEmail is passed correctly
       });
 
@@ -43,7 +43,7 @@ const Exerciselist = () => {
         dispatch(fetchCategories(currentUserEmail));
 
         // Fetch the updated exercise list for the current muscle category
-        const getUpdatedExercise = await axios.get(`http://localhost:5000/category/${currentMuscle}/exercises`, {
+        const getUpdatedExercise = await axios.get(`https://fitlog-server.onrender.com/category/${currentMuscle}/exercises`, {
           params: { userEmail: currentUserEmail } // Pass userEmail in query params
         });
         dispatch({type: "SET_SELECTED_EXERCISE", payload: getUpdatedExercise.data})
