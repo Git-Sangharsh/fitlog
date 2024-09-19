@@ -1,0 +1,193 @@
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import "./Date.css";
+import { useNavigate } from "react-router-dom";
+import trashSvg from "../assets/trash.svg";
+
+const DateComponent = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const currentUserEmail = useSelector((state) => state.currentUserEmail);
+  const loginStatus = useSelector((state) => state.loginStatus);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [dateFormat, setDateFormat] = useState("");
+  const [exercises, setExercises] = useState({});
+  const [error, setError] = useState(false); // State to manage errors
+  const [loading, setLoading] = useState(true); // State to manage loading
+
+  console.log("exercises is ", exercises)
+  const getFormattedDate = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const isToday = (date) => {
+    const today = new Date();
+    return (
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate()
+    );
+  };
+
+  const isYesterday = (date) => {
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    return (
+      date.getFullYear() === yesterday.getFullYear() &&
+      date.getMonth() === yesterday.getMonth() &&
+      date.getDate() === yesterday.getDate()
+    );
+  };
+
+  // Update dateFormat whenever currentDate changes
+  useEffect(() => {
+    setDateFormat(getFormattedDate(currentDate));
+  }, [currentDate]);
+
+  const goToNextDate = () => {
+    if (!isToday(currentDate)) {
+      setCurrentDate((prevDate) => {
+        const newDate = new Date(prevDate);
+        newDate.setDate(prevDate.getDate() + 1);
+        return newDate;
+      });
+    }
+  };
+
+  const goToPreviousDate = () => {
+    setCurrentDate((prevDate) => {
+      const newDate = new Date(prevDate);
+      newDate.setDate(prevDate.getDate() - 1);
+      return newDate;
+    });
+  };
+
+  console.log(dateFormat)
+
+  useEffect(() => {
+    const getExerciseOnDate = async () => {
+      setLoading(true); // Set loading to true when starting to fetch
+      setError(false); // Reset error state
+
+      try {
+        if (currentUserEmail && dateFormat) {
+          const response = await axios.get(`http://localhost:5000/exercises`, {
+            params: {
+              userEmail: currentUserEmail,
+              date: dateFormat,
+            },
+          });
+          setExercises(response.data);
+            console.log(response.data);
+        }
+      } catch (err) {
+        console.log(err.message);
+        setError(true); // Set error state to true if an error occurs
+      } finally {
+        setLoading(false); // Set loading to false when done
+      }
+    };
+
+    // Fetch exercise data whenever dateFormat changes
+    getExerciseOnDate();
+  }, [dateFormat, currentUserEmail]);
+
+  const handleSet = (category) => {
+    console.log(category);
+    dispatch({ type: "SET_LIST_EXERCISE", payload: category });
+    dispatch({ type: "SET_CURRENT_EXERCISE", payload: category });
+    navigate("/muscle/exercise/set");
+    console.log("selected Exercise is ", category);
+  };
+
+    const listExercise = useSelector((state) => state.listExercise);
+  const currentExercise = useSelector((state) => state.currentExercise);
+
+    console.log("listExercise", listExercise);
+  console.log("currentExercise", currentExercise);
+
+
+  const handleTrashExercise = async (currentMuscle, exercise) => {
+    console.log(currentMuscle, exercise);
+    try{
+      const response = await axios.delete(`http://localhost:5000/category/${currentMuscle}/exercise/${exercise}`, {
+        data: { userEmail: currentUserEmail }, // Ensure userEmail is passed correctly
+      });
+      if(response.data.status === true){
+
+      }
+    }catch(err) {
+      console.log("error while handling trash exercise", err.message);
+    }
+  };
+
+  return (
+    <>
+      {" "}
+      {loginStatus && (
+        <div className="date-container">
+          <div className="date-wrapper">
+            <div className="date-control">
+              <button className="date-control-btn" onClick={goToPreviousDate}>
+                Previous Date
+              </button>
+              <h1 className="today">
+                {isToday(currentDate)
+                  ? "Today"
+                  : isYesterday(currentDate)
+                  ? "Yesterday"
+                  : dateFormat}
+              </h1>
+              <button
+                className="date-control-btn"
+                onClick={goToNextDate}
+                disabled={isToday(currentDate)}
+              >
+                Next Date
+              </button>
+            </div>
+
+            {loading && <p>Loading...</p>}
+            {error && !loading && (
+              <h1 className="not-found">No workout data available.</h1>
+            )}
+            {!loading && !error && (
+              <>
+                {Object.keys(exercises).length > 0 ? (
+                  Object.keys(exercises).flatMap((category) =>
+                    exercises[category].map((exercise) => (
+                      <div className="exercise-box" key={exercise._id}>
+                        <div></div>
+                        <h1
+                          className="date-name"
+                          onClick={() => handleSet(exercise)}
+                        >
+                          {exercise.name.toUpperCase()}
+                        </h1>
+                        <img
+                          className="trash-logo"
+                          onClick={() => handleTrashExercise(category, exercise.name)}
+                          src={trashSvg}
+                          alt=""
+                        />
+                      </div>
+                    ))
+                  )
+                ) : (
+                  <p>No exercises found for this date.</p>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default DateComponent;

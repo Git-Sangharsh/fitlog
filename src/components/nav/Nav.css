@@ -1,24 +1,120 @@
-.nav-container{
-    height: 70px;
-    background-color: rgb(46, 46, 46);
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
+.nav-container {
+  height: 70px;
+  background-color: rgb(46, 46, 46);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.nav-wrapper{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-    padding: 0px 20px;
-    z-index: 999 !important;
-    background-color: rgb(46, 46, 46);
+.add-logo {
+  width: 30px;
+  cursor: pointer;
 }
-.nav-logo{
-    width: 30px;
-    border-radius: 50%;
+
+.right-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.nav-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0px 20px;
+  z-index: 999 !important;
+  background-color: rgb(46, 46, 46);
+  position: relative;
+}
+.nav-logo {
+  width: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.drop-box {
+  position: absolute;
+  background-color: red;
+  top: 0px;
+  right: 0px;
+  background-color: #ffb726;
+  box-shadow: 0px 4px 0px black;
+  width: 100%;
+  z-index: 800;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.208);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-style {
+  background-color: #ffb726;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 300px;
+  box-shadow: 0px 4px 0px rgb(53, 53, 53);
+  padding: 30px;
+}
+.drop-li {
+  padding: 4px 8px;
+  list-style: none;
+  font-family: "Anton", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: rgb(53, 53, 53);
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  width: 100%;
+  transition: 0.2s ease-in;
+}
+
+.drop-li:hover {
+  background-color: aliceblue;
+  transition: 0.2s ease-in;
+}
+
+.pop {
+  position: fixed;
+  bottom: 50px;
+  background-color: #ffd426;
+  color: #2E2E2E;
+  padding: 10px;
+  box-shadow: 0px 4px 00px #2E2E2E;
+  z-index: 999;
+}
+
+
+@media (max-width: 425px) {
+  .nav-container {
+    height: 60px;
+  }
+
+  .nav-logo {
+    width: 25px;
+  }
+
+  .drop-style {
+    padding: 10px;
+    width: 60%;
+    background-color: #ffd426;
+  }
+
+  .drop-li{
+    font-size: 12px;
+  }
+
+  .drop-style{
+    width: 275px;
+  }
 }

@@ -1,0 +1,113 @@
+.welcome-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 90px;
+}
+
+
+.welcome-wrapper{
+    padding: 40px;
+    background-color: #32AAFE;
+    background-color: #FFCE00;
+    color: #ffffff;
+    color: #44423F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0px 8px 0px #44423F;
+}
+.welcome-txt{
+    text-align: center;
+}
+
+.welcome-li{
+    list-style: none;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+    text-align: center;
+
+}
+
+.btn-sign-up{
+    width: 100%;
+    padding: 8px;
+    border: none;
+    box-shadow: 0px 4px 0px #44423F;
+    font-weight: 900;
+    color: #44423F;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-style: italic;
+    transition: 0.1s ease-in;
+    cursor: pointer;
+}
+
+.btn-sign-up:hover{
+    scale: 1.02;
+}
+
+@media (max-width: 768px) {
+        .welcome-wrapper{
+            padding: 10px;
+            width: 80%;
+        }
+
+        .welcome-tag{
+            font-size: 12px;
+            text-align: center;
+        }
+        .welcome-li{
+            font-size: 12px;
+        }
+
+}
+
+@media (max-width: 425px) {
+    .welcome-wrapper{
+        padding: 10px;
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .welcome-txt{
+        font-size: 25px;
+    }
+
+    .welcome-tag{
+        font-size: 12px;
+        text-align: center;
+    }
+    .welcome-li{
+        font-size: 12px;
+        text-align: center;
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .welcome-wrapper{
+        padding: 10px;
+        width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .welcome-txt{
+        font-size: 20px;
+    }
+
+    .welcome-tag{
+        font-size: 8px;
+        text-align: center;
+    }
+    .welcome-li{
+        font-size: 8px;
+        text-align: center;
+    }
+
+}

@@ -24,15 +24,51 @@
      width: 100%;
      box-shadow: 0px 4px 0px rgb(46, 46, 46);
     transition: 0.3s ease;
-
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
  }
 
  .exercise-box:hover{
-    scale: 1.05;
+    scale: 1.01;
     transition: 0.3s ease;
-
 }
 
  .exercise-name{
     text-align: center;
+    font-style: italic;
+    width: 100%;
+ }
+
+ .trash-logo{
+    width: 30px;
+    cursor: pointer;
+ }
+
+ @media (max-width: 425px){
+
+    .exercise-box{
+        padding: 10px;
+    }
+    .exercise-name, .date-name{
+        font-size: 12px;
+    }
+
+    .home-wrapper{
+        width: 95%;
+        gap: 10px;
+    }
+
+    .date-wrapper{
+        gap: 10px !important;
+        width: 95% !important;
+    }
+
+    .exercise-box:hover{
+        scale: 1;
+    }
+    .trash-logo{
+        width: 12px;
+     }
+
  }

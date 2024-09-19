@@ -1,44 +1,96 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./Muscles.css";
-import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { fetchCategories } from "../../Store/Store"; // Adjust the path as needed
+import trashSvg from "../assets/trash.svg";
+import axios from "axios";
 
 const Muscles = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [fetchData, setFetchData] = useState([]); // Data is now an array of categories
+  // Get categories from Redux store
+  const fetchData = useSelector((state) => state.listExercise);
+  const currentUserEmail = useSelector((state) => state.currentUserEmail);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/categories")
-      .then((res) => setFetchData(res.data)) // Fetch the data
-      .catch((err) => console.error(err.message)); // Log any error
-  }, []);
+    dispatch(fetchCategories(currentUserEmail));
+  }, [dispatch, currentUserEmail]);
 
   // Handler to show exercises and notes when clicked
   const handleClick = (category, exercises) => {
-    dispatch({ type: 'SET_SELECTED_EXERCISE', payload: exercises });
-    dispatch({ type: 'SET_LIST_EXERCISE', payload: exercises });
-    navigate("/list");
+    // Assuming exercises is an object where keys are categories and values are arrays of exercises
+    dispatch({ type: "SET_SELECTED_EXERCISE", payload: exercises[category]  });
+    dispatch({ type: "SET_CURRENT_MUSCLE", payload: category });
+    navigate("/muscle/exercise");
+    // console.log("category is ", category, "exercises is ", exercises[category]);
   };
+
+
+  // Handler to delete a specific name
+  const handleTrash = async (name) => {
+    try {
+      // Sending DELETE request with category name in the path and userEmail as a query parameter
+      const response = await axios.delete(`http://localhost:5000/category/${name}`, {
+        params: { userEmail: currentUserEmail }, // Pass userEmail as query parameter
+      });
+
+      console.log(response.data.message);
+
+      // Refetch the categories to update the UI
+      dispatch(fetchCategories(currentUserEmail));
+    } catch (error) {
+      console.error("Error deleting the category:", error);
+    }
+  };
+
+  const loginStatus = useSelector((state) => state.loginStatus)
+
 
   return (
     <div className="home-container">
       <div className="home-wrapper">
-        {/* Render categories dynamically */}
-        {fetchData.map((category) => (
-          <div
-            key={category._id}
-            className="exercise-box"
-            onClick={() => handleClick(category.name, category.exercises)}
-          >
-            <h1 className="exercise-name">{category.name.toUpperCase()}</h1> {/* Show category name as header */}
-          </div>
-        ))}
+        {fetchData.length > 0 && loginStatus ? (
+          fetchData.flatMap((category) =>
+            Array.isArray(category.name)
+              ? category.name.map((name) => (
+                  <div key={`${category._id}-${name}`} className="exercise-box">
+                    <h1
+                      className="exercise-name"
+                      onClick={() => handleClick(name, category.exercises)}
+                    >
+                      {name.toUpperCase()}
+                    </h1>
+                    <img
+                      className="trash-logo"
+                      onClick={() => handleTrash(name)} // Pass the specific name
+                      src={trashSvg}
+                      alt="Delete"
+                    />
+                  </div>
+                ))
+              : [
+                  <div key={category._id} className="exercise-box">
+                    <h1
+                      className="exercise-name"
+                      onClick={() => handleClick(category.name, category.exercises)}
+                    >
+                      {category.name.toUpperCase()}
+                    </h1>
+                    <img
+                      className="trash-logo"
+                      onClick={() => handleTrash(category.name)} // Pass the specific name
+                      src={trashSvg}
+                      alt="Delete"
+                    />
+                  </div>,
+                ]
+          )
+        ) : (
+          <div>No categories found</div>
+        )}
       </div>
-
     </div>
   );
 };

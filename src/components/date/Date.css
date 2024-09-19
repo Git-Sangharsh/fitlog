@@ -1,0 +1,79 @@
+.date-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.date-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  padding: 20px 0px;
+  width: 90% !important;
+}
+
+.date-control{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2E2E2E;
+    padding: 20px;
+    color: white;
+}
+
+.date-control-btn{
+    padding: 8px;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    background-color: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.date-box {
+  background-color: rgb(255, 212, 38);
+  padding: 20px;
+  color: rgb(46, 46, 46);
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0px 4px 0px rgb(46, 46, 46);
+  transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date-name{
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+}
+
+.not-found{
+    text-align: center;
+    color: #2E2E2E;
+}
+
+.details-wrapper-box-date{
+  font-size: 30px;
+}
+
+@media(max-width: 500px){
+  .date-control-btn{
+    padding: 2px;
+    font-size: 10px;
+    width: 90px;
+}
+.date-control{
+  padding: 8px;
+}
+
+.details-wrapper-box-date, .today, .save-btn, .details-wrapper-box-reps, .details-wrapper-box-weight{
+  font-size: 12px;
+  text-align: center;
+}
+}

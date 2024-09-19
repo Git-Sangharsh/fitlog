@@ -1,22 +1,159 @@
-.details-container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    min-height: 100vh;
-    width: 100%;
+.details-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
 }
-.details-wrapper{
-    gap: 30px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+.details-wrapper {
+  gap: 30px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 90%;
+  min-height: 100vh;
+}
+
+.add-set-box {
+  width: 100%;
+}
+
+.add-set-box-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+  gap: 30px;
+  background-color: #ffd426;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.add-set-input {
+  padding: 5px 20px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 3px solid rgb(46, 46, 46);
+  text-align: center;
+  font-size: 30px;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  color: rgb(46, 46, 46);
+  width: 100%;
+}
+
+.add-set-input:focus {
+  border: none;
+  border-bottom: 3px solid rgb(46, 46, 46);
+  outline: none;
+}
+
+.reps{
+  border-bottom: 3px solid rgb(46, 46, 46);
+}
+
+.save-btn {
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  padding: 10px;
+  background-color: #ffface;
+  border: none;
+  cursor: pointer;
+  /* border-bottom: 2px solid black; */
+  box-shadow: 0px 6px 0px rgb(46, 46, 46);
+}
+
+.icon-logo {
+  width: 30px;
+  cursor: pointer;
+}
+
+.details-wrapper-box {
+  background-color: rgb(255, 212, 38);
+  color: rgb(46, 46, 46);
+  cursor: pointer;
+  width: 100%;
+  box-shadow: 0px 6px 0px rgb(46, 46, 46);
+  display: flex;
+  flex-direction: column;
+}
+
+.details-wrapper-box-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  transition: 0.5s ease;
+}
+
+.selected-note{
+  background-color: white;
+  transition: 0.5s ease;
+}
+.details-wrapper-box-date {
+  font-weight: 600;
+  background-color: rgb(46, 46, 46);
+  width: 100%;
+  padding: 5px 10px;
+  color: white;
+  text-align: center;
+}
+
+.details-wrapper-exercise-data {
+  font-weight: 600;
+  background-color: rgb(46, 46, 46);
+  width: 100%;
+  padding: 5px 10px;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.details-wrapper-box-reps,
+.details-wrapper-box-weight {
+  font-weight: 600;
+  padding: 5px 10px;
+  /* width: 140px; */
+  width: max-content;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.grid-div{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-sizing: border-box;
+}
+.grid-btn{
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  padding: 10px;
+  background-color: #ffface;
+  border: none;
+  cursor: pointer;
+  /* border-bottom: 2px solid black; */
+  box-shadow: 0px 6px 0px rgb(46, 46, 46);
+}
+
+.red{
+  background-color: rgb(231, 77, 77);
+  color: white;
+}
+
+
+@media (max-width: 768px) {
+  .details-wrapper {
     gap: 20px;
     width: 90%;
     min-height: 100vh;
-}
+  }
 
-.details-wrapper-box{
+  .details-wrapper-box {
     background-color: rgb(255, 212, 38);
     color: rgb(46, 46, 46);
     cursor: pointer;
@@ -24,55 +161,16 @@
     box-shadow: 0px 6px 0px rgb(46, 46, 46);
     display: flex;
     flex-direction: column;
+  }
 }
 
 
-.details-wrapper-box-inner{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    place-items: center;
-}
-.details-wrapper-box-date{
-    font-weight: 600;
-    background-color: rgb(46, 46, 46);
-    width: 100%;
-    padding: 5px 10px ;
-    color: white;
-    text-align: center;
-}
+@media (max-width: 425px){
+  .icon-logo{
+    width: 30px;
+  }
 
-.details-wrapper-exercise-data{
-    font-weight: 600;
-    background-color: rgb(46, 46, 46);
-    width: 100%;
-    padding: 5px 10px ;
-    color: white;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.details-wrapper-box-reps, .details-wrapper-box-weight{
-    font-weight: 600;
-    padding: 5px 10px ;
-    /* width: 140px; */
-    width: max-content;
-}
-
-@media(max-width: 768px){
-    .details-wrapper{
-        gap: 20px;
-        width: 90%;
-        min-height: 100vh;
-    }
-
-    .details-wrapper-box{
-        background-color: rgb(255, 212, 38);
-        color: rgb(46, 46, 46);
-        cursor: pointer;
-        width: 100%;
-        box-shadow: 0px 6px 0px rgb(46, 46, 46);
-        display: flex;
-        flex-direction: column;
-    }
-
+  .add-set-input{
+    font-size: 14px;
+  }
 }
