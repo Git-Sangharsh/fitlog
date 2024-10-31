@@ -114,7 +114,7 @@ const Nav = () => {
               className="drop-box"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0, type: "spring" }}
+              transition={{ duration: 0.8, type: "spring" }}
               exit={{ opacity: 0 }}
             >
               <div className="drop-style">

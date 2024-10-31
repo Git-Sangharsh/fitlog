@@ -210,7 +210,7 @@ const Auth = () => {
               <h6 className="toggle-auth" onClick={handleToggleAuth}>
                 already user try,
                 <span className="toggle-span">
-                  {toggleAuth ? "SIGN UP" : "SIGN IN"}
+                  {toggleAuth ? " SIGN UP" : " SIGN IN"}
                 </span>
               </h6>
 
